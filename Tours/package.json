@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "formik": "^2.4.3",
     "react": "^18.2.0",
     "react-data-table-component": "^7.5.4",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
+    "react-phone-number-input": "^3.3.5",
+    "react-router-dom": "^6.15.0",
     "react-table": "^7.8.0",
-    "styled-components": "^6.0.7"
+    "styled-components": "^6.0.7",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

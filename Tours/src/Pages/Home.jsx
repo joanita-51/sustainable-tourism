@@ -11,6 +11,7 @@ import {FaQuoteLeft} from 'react-icons/fa'
 import { TourismData, ToursimColumns } from '../data'
 import DataTable from 'react-data-table-component'
 import {FiMenu} from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 function Home() {
     const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -21,8 +22,8 @@ function Home() {
     <>
         {/* Hero section */}
         <div id="home" className="bg-cover bg-center h-screen" style={{backgroundImage: `url(${backgroundImage})`}}>
-            <div className=" bg-[#040D12] bg-opacity-60 absolute inset-0">
-                <div className='container mx-auto flex justify-between items-center px-4 text-white md:px-10 py-5'>
+            <div className="bg-[#040D12] bg-opacity-60 absolute inset-0">
+                <div className='container mx-auto flex justify-between items-center px-4 text-white py-5'>
                     {/* Hamburger Menu (for small screens) */}
                     <div className="md:hidden">
                         <button className="text-white" onClick={toggleNav}>
@@ -42,7 +43,7 @@ function Home() {
                     </div>
                     {/* Left Side (Navbar) */}
                     <div className="hidden md:block">
-                        <h1 className="text-2xl font-bold uppercase tracking-tighter">E - Toursim</h1>
+                        <h1 className="text-2xl font-bold uppercase">E-Toursim</h1>
                         <p className='text-lg uppercase tracking-widest'>UGANDA</p>
                     </div>
 
@@ -105,9 +106,9 @@ function Home() {
                             <p className="text-gray-700 text-sm">Enhance your outdoor adventures with high-quality camping bags for essential item storage.</p>
                         </div>
                         <div className="px-6 py-4">
-                            <a href="#" className="bg-[#EB1D36] hover:bg-[#C31228] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-full">
+                            <Link to="/order" className="bg-[#EB1D36] hover:bg-[#C31228] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-full">
                                 Order Now
-                            </a>
+                            </Link>
                         </div>
                     </div>
 
