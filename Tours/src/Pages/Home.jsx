@@ -11,8 +11,39 @@ import {FaQuoteLeft} from 'react-icons/fa'
 import { TourismData, ToursimColumns } from '../data'
 import DataTable from 'react-data-table-component'
 import {FiMenu} from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+const items = [
+    {
+      name: "Camping Backpack",
+      price: 100,
+      description: "Enhance your outdoor adventures with high-quality camping bags for essential item storage.",
+      image: camping,
+    },
+    {
+      name: "Emergency Medical Kit",
+      price: 75,
+      description: "Get one of our essential first aid kits for safety during your trips.",
+      image: kit,
+    },
+    {
+      name: "Traveling Car",
+      price: 200,
+      description: "Rent our comfortable and reliable traveling cars for your journeys.",
+      image: van,
+    },
+    // Add more items as needed
+];
 function Home() {
+    
+    const navigate = useNavigate();
+    const handleClick = (itemName, itemPrice) => {
+        navigate('/order',{
+            state:{
+                itemName,
+                itemPrice,
+            }
+        })
+    }
     const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
     const [isNavOpen, setIsNavOpen] = useState(false);
     const toggleNav = ()=>{
@@ -98,47 +129,23 @@ function Home() {
                 <h2 className="text-3xl font-bold text-center uppercase mb-6">Our Services</h2>
                 <p className="bg-[#EB1D36] h-[2px] w-20 mx-auto mt-2 mb-12"></p>
                 <div className="flex flex-wrap justify-center">
-                    {/* Service Card 1: Selling Camping Bags */}
-                    <div className="max-w-sm mx-4 mb-8 bg-white rounded-lg overflow-hidden shadow-2xl">
-                        <img src={camping} alt="Camping Bags" className="w-full h-40 object-cover" />
-                        <div className="px-6 py-4">
-                            <h3 className="text-xl font-bold mb-2">Camping Backpacks</h3>
-                            <p className="text-gray-700 text-sm">Enhance your outdoor adventures with high-quality camping bags for essential item storage.</p>
-                        </div>
-                        <div className="px-6 py-4">
-                            <Link to="/order" className="bg-[#EB1D36] hover:bg-[#C31228] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-full">
-                                Order Now
-                            </Link>
-                        </div>
+                {items.map((item, index) => (
+                    <div key={index} className="max-w-sm mx-4 mb-8 bg-white rounded-lg overflow-hidden shadow-2xl">
+                    <img src={item.image} alt={item.name} className="w-full h-40 object-cover" />
+                    <div className="px-6 py-4">
+                        <h3 className="text-xl font-bold mb-2">{`${item.name}s`}</h3>
+                        <p className="text-gray-700 text-sm">{item.description}</p>
                     </div>
-
-                    {/* Service Card 2: Selling First Aid Kits */}
-                    <div className="max-w-sm mx-4 mb-8 bg-white rounded-lg overflow-hidden shadow-2xl">
-                        <img src={kit} alt="First Aid Kits" className="w-full h-40 object-cover" />
-                        <div className="px-6 py-4">
-                        <h3 className="text-xl font-bold mb-2">Emergency Medical Kits</h3>
-                        <p className="text-gray-700 text-sm">Get one of our essential first aid kits for safety during your trips.</p>
-                        </div>
-                        <div className="px-6 py-4">
-                        <a href="#" className="bg-[#EB1D36] hover:bg-[#C31228] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-full">
-                            Order Now
-                        </a>
-                        </div>
+                    <div className="px-6 py-4">
+                        <button
+                        onClick={() => handleClick(item.name, item.price)}
+                        className="bg-[#EB1D36] hover:bg-[#C31228] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-full"
+                        >
+                        Order Now
+                        </button>
                     </div>
-
-                    {/* Service Card 3: Traveling Car */}
-                        <div className="max-w-sm mx-4 mb-8 bg-white rounded-lg overflow-hidden shadow-2xl">
-                        <img src={van} alt="Traveling Car" className="w-full h-40 object-cover" />
-                            <div className="px-6 py-4">
-                            <h3 className="text-xl font-bold mb-2">Traveling Car</h3>
-                            <p className="text-gray-700 text-sm">Rent our comfortable and reliable traveling cars for your journeys.</p>
-                            </div>
-                            <div className="px-6 py-4">
-                            <a href="#" className="bg-[#EB1D36] hover:bg-[#C31228] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-full">
-                                Order Now
-                            </a>
-                            </div>
-                        </div>
+                    </div>
+                ))}
                 </div>
             </div>
         </div>
