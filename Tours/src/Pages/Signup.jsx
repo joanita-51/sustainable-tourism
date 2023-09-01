@@ -1,31 +1,59 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link, useLocation} from 'react-router-dom';
 
-function Signup(props) {
+function Signup() {
     const location = useLocation()
-    const {itemName, itemPrice} = location.state ||  { itemName:" ", itemPrice:0 };
-    const handleSubmit = ()=>{
-        alert(JSON.stringify(email, firstName, phoneNumber, lastName, items, address, amount, mobile, delivery))
+    const {itemName, itemPrice} = location.state ||{};
+    const handleSubmit = async(event)=>{
+        event.preventDefault();
+        try {
+            alert(`Thank you ${firstName} for placing an order of ${items} ${itemName}(s). Please check your phone (${phoneNumber})'s sms for more details`)
+            // reseting the form 
+            setEmail("")
+            setFirstName("")
+            setAddress("")
+            setPhoneNumber("")
+            setLastName("")
+            setItems(1)
+            setAmount(0)
+            setPaymentMethod("")
+
+            console.log(email, firstName, lastName, items, address, amount, paymentMethod)            
+        } catch (error) {
+            console.error("Error submitting the details:", error)
+        }
+
     }
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [lastName, setLastName] = useState("")
-    const [items, setItems] = useState(null)
+    const [items, setItems] = useState(1)
     const [address, setAddress] = useState("")
     const [amount, setAmount] = useState(0)
-    const [mobile, setMobile] = useState("")
-    const [delivery, setDelivery] = useState("")
+    const [paymentMethod, setPaymentMethod] = useState("")
+
+    // Function to calculate and update the amount
+    const calculateAmount = () => {
+        const totalAmount = itemPrice * items;
+        setAmount(totalAmount);
+    };
+
+    // Call the calculateAmount function whenever itemPrice or items change
+    useEffect(() => {
+        calculateAmount();
+    }, [itemPrice, items]);
+
 
   return (
     <form onSubmit={handleSubmit} className='bg-[#f8f6f6]'>
         <div className='container m-auto px-6 md:px-4 '>
             <p className="text-2xl font-bold text-center uppercase pt-12 mb-6">To Confirm Your Order, Please Complete the Following Details.</p>
             <p className="bg-[#EB1D36] h-[2px] w-20 mx-auto mt-2 mb-12"></p>
-            <div className='grid grid-cols-2 gap-10 mt-6'>
+            <div className='grid md:grid-cols-2 gap-10 mt-6'>
                 {/* First Name */}
                 <div>
-                    <label className='text-sm'>FIRST NAME</label> <br />
+                    <label className='text-sm uppercase'>FIRST NAME</label> <br />
                     <input 
                         className='w-full text-sm rounded-lg p-2 border-solid border border-slate-400' 
                         placeholder='first name'
@@ -39,7 +67,7 @@ function Signup(props) {
 
                 {/* Last Name */}
                 <div>
-                    <label className='text-sm'>LAST NAME</label> <br />
+                    <label className='text-sm uppercase'>LAST NAME</label> <br />
                     <input 
                         className='w-full rounded-lg p-2 text-sm border-solid border border-slate-400' 
                         placeholder='last name'
@@ -51,10 +79,10 @@ function Signup(props) {
                     />
                 </div>
             </div>
-            <div className='grid grid-cols-2 gap-10 mt-6'>
+            <div className='grid md:grid-cols-2 gap-10 mt-6'>
                 {/* Email */}
                 <div>
-                    <label className='text-sm'>EMAIL</label> <br />
+                    <label className='text-sm uppercase'>EMAIL</label> <br />
                     <input 
                         className='w-full text-sm rounded-lg p-2 border-solid border border-slate-400' 
                         placeholder='example@gmail.com'
@@ -68,7 +96,7 @@ function Signup(props) {
 
                 {/* Phone Number */}
                 <div>
-                    <label className='text-sm'>PHONE NUMBER</label> <br />
+                    <label className='text-sm uppercase'>PHONE NUMBER</label> <br />
                     <input 
                         className='w-full rounded-lg p-2 text-sm border-solid border border-slate-400' 
                         placeholder='Phone number'
@@ -80,7 +108,7 @@ function Signup(props) {
                     />
                 </div>
             </div>
-            <div className='grid grid-cols-2 gap-10 mt-6'>
+            <div className='grid md:grid-cols-2 gap-10 mt-6'>
                 {/* Items */}
                 <div>
                     <label className='text-sm uppercase'>
@@ -88,7 +116,7 @@ function Signup(props) {
                     </label> <br />
                     <input 
                         className='w-full text-sm rounded-lg p-2 border-solid border border-slate-400' 
-                        placeholder="0"
+                        placeholder="1"
                         type='number'
                         name='item'
                         value={items}
@@ -99,7 +127,7 @@ function Signup(props) {
 
                 {/* Address */}
                 <div>
-                    <label className='text-sm'>ADDRESS</label> <br />
+                    <label className='text-sm uppercase'>ADDRESS</label> <br />
                     <input 
                         className='w-full rounded-lg p-2 text-sm border-solid border border-slate-400' 
                         placeholder='address'
@@ -111,32 +139,47 @@ function Signup(props) {
                     />
                 </div>
             </div>
-            <div className='grid grid-cols-2 gap-10 mt-6'>
+            <div className='grid md:grid-cols-2 gap-10 mt-6'>
 
                 {/* Amount */}
                 <div>
-                    <label className='text-sm'>TOTAL AMOUNT TO PAY</label> <br />
+                    <label className='text-sm uppercase'>TOTAL AMOUNT TO PAY</label> <br />
                     <input 
                         className='w-full rounded-lg p-2 text-sm border-solid border border-slate-400' 
-                        value={itemPrice * items}
+                        value={amount}
                         placeholder={amount}
                         name='amount'
                         type='number'
-                        onChange={(e)=>setAmount(e.target.value)}
                         disabled
                     />
                 </div>
                 {/* Payment Mode */}
                 <div>
                     <p className='text-sm uppercase'>Select your payment method.</p>
-                    <input type="radio" id="mobile" name="payment" value={mobile} onChange={(e)=>setMobile(e.target.value)}/>
+                    <input 
+                        type="radio" 
+                        id="mobile" 
+                        name="payment" 
+                        value="Mobile Money"
+                        checked = {paymentMethod === 'Mobile Money'}
+                        onChange={(e)=>setPaymentMethod(e.target.value)}
+                        required
+                    />
                     <label className='text-sm'>Mobile Money</label><br/>
-                    <input type="radio" id="delivery" name="payment" value={delivery} onChange={(e)=>setDelivery(e.target.value)}/>
+                    <input 
+                        type="radio" 
+                        id="delivery" 
+                        name="payment"
+                        value="Pay On Delivery"
+                        checked = {paymentMethod === 'Pay On Delivery'}
+                        onChange={(e)=>setPaymentMethod(e.target.value)}
+                        required
+                    />
                     <label className='text-sm'>Pay On Delivery</label><br/>
                 </div>
 
             </div>
-            <div className='flex justify-center items-center py-12 space-x-7'>
+            <div className='flex md:justify-center items-center py-12 space-x-7'>
                 {/* Cancel button */}
                 <button 
                     className='bg-[#EB1D36] hover:bg-[#C31228] transition duration-300 ease-in-out text-white font-bold py-2 px-8 rounded-full uppercase'
