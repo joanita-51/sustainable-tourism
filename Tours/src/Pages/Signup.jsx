@@ -112,7 +112,7 @@ function Signup() {
                 {/* Items */}
                 <div>
                     <label className='text-sm uppercase'>
-                    HOW MANY {itemName} (s) WOULD YOU LIKE TO BUY @ UGShs. {itemPrice}
+                    HOW MANY {itemName} (s) WOULD YOU LIKE TO HAVE @ UGShs. {itemPrice}
                     </label> <br />
                     <input 
                         className='w-full text-sm rounded-lg p-2 border-solid border border-slate-400' 

@@ -151,31 +151,31 @@ function Home() {
         </div>
 
         {/* The about us section  */}
-        <section class="bg-white py-24" id='about'>
-            <div class=" mx-16 grid md:grid-cols-3 space-x-20">
+        <section className="bg-white py-24" id='about'>
+            <div className=" mx-16 grid md:grid-cols-3 space-x-20">
                 <div className=''>
-                    <h2 class="text-3xl font-bold mb-6 text-center md:text-left">ABOUT US</h2>
+                    <h2 className="text-3xl font-bold mb-6 text-center md:text-left">ABOUT US</h2>
                     <p className="bg-[#EB1D36] h-[2px] m-auto md:m-0 w-20 mt-2 mb-12 md:mb-6"></p>
-                    <p class="text-gray-700 mb-4 text-justify text-sm lg:text-base">
-                        Welcome to <span class="text-[#EB1D36] font-semibold">E-Tourism Uganda</span>, where we make your Uganda adventure amazing!
+                    <p className="text-gray-700 mb-4 text-justify text-sm lg:text-base">
+                        Welcome to <span className="text-[#EB1D36] font-semibold">E-Tourism Uganda</span>, where we make your Uganda adventure amazing!
                     </p>
-                    <p class=" text-gray-700 mb-4 text-justify text-sm lg:text-base">
+                    <p className=" text-gray-700 mb-4 text-justify text-sm lg:text-base">
                         We love Uganda's beauty and culture. Our goal is to help you explore it sustainably.
                     </p>
-                    <p class=" text-gray-700 mb-4 text-justify text-sm lg:text-base">
+                    <p className=" text-gray-700 mb-4 text-justify text-sm lg:text-base">
                         Our team is full of Uganda enthusiasts. We're here to assist you whether you want a wildlife safari, camping gear, or a tourist van for comfort.
                     </p>
-                    <p class=" text-gray-700 mb-8 text-justify text-sm lg:text-base">
+                    <p className=" text-gray-700 mb-8 text-justify text-sm lg:text-base">
                         We're all about responsible travel, so your adventure is memorable and eco-friendly. Join us to uncover Uganda's heart and create your unique story.
                     </p>
                     <div className='flex justify-center md:justify-start text-sm lg:text-base'>
-                        <a href="#services" class="bg-[#EB1D36] text-white font-bold py-3 px-8 rounded-full hover:bg-[#C31228] transition duration-300 ease-in-out block text-center md:inline-block ">
+                        <a href="#services" className="bg-[#EB1D36] text-white font-bold py-3 px-8 rounded-full hover:bg-[#C31228] transition duration-300 ease-in-out block text-center md:inline-block ">
                             Check out our services
                         </a>
                     </div>
 
                 </div>
-                <div class="md:col-span-2 pt-12 md:pt-0">
+                <div className="md:col-span-2 pt-12 md:pt-0">
                     <div className='md:flex md:space-x-5 space-y-5'>
                         <div className='flex flex-col space-y-5'>
                             <img src={cows} alt='Cows' className='rounded-xl w-full' />
@@ -218,7 +218,7 @@ function Home() {
         {/* Footer Section */}
         <div className='bg-[#191919] py-24' id='contact'>
             <div className='container mx-auto text-center text-white'>
-                <p>123 Fifth Avenue, Kampala, Uganda | Phone: 256-123-456-3013 | Email: E-Toursim@Uganda.com</p>
+                <p>123 Fifth Avenue, Kampala, Uganda | Phone: 256-771-97-3013 | Email: E-Toursim@Uganda.com</p>
                 <p className='mt-5'>Copyright © 2023 E-Tourism Uganda</p>
             </div>
 

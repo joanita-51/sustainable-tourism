@@ -1,3 +1,5 @@
+import Soon from "./Pages/Soon";
+
 const BookNowButton = ({ onClick }) => (
     <button 
       onClick={onClick}
@@ -38,7 +40,8 @@ export const ToursimColumns=[
     { name: 'Inclusions', selector: row => row.inclusions, sortable: true,},
     { name: 'Exclusions', selector: row => row.exclusions, sortable: true,},
     { name: 'Availability', selector: row => row.availability, sortable: true,},
-    { name: 'Book Now', selector: (row) => row.bookButton,sortable: true, cell: (row) => <BookNowButton onClick={() => handleBooking(row)} />,},
+    // { name: 'Book Now', selector: (row) => row.bookButton,sortable: true, cell: (row) => <BookNowButton onClick={() => handleBooking(row)} />,},
+    { name: 'Book Now', selector: (row) => row.bookButton,sortable: true, cell: (row) => <Soon destination={row.destination}/>,},
 ]
 
 export const TourismData = [
