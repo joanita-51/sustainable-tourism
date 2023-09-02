@@ -1,12 +1,38 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useLocation} from 'react-router-dom';
 
+const sendMessage = ()=>{
+    var myHeaders = new Headers();
+myHeaders.append("Accept", "application/json");
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+myHeaders.append("apiKey", "c5c7c7f8fb98ab8db46120194f430f71e9b1482f8d9ee2e00390d2f309b6e9c7");
+myHeaders.append('Access-Control-Allow-Origin', '*')
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("username", "katznicho");
+urlencoded.append("to", "+256771973013");
+urlencoded.append("message", "Hello World!");
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://api.africastalking.com/version1/messaging", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+}
 function Signup() {
     const location = useLocation()
     const {itemName, itemPrice} = location.state ||{};
+
     const handleSubmit = async(event)=>{
         event.preventDefault();
         try {
+            sendMessage({phoneNumber})
             alert(`Thank you ${firstName} for placing an order of ${items} ${itemName}(s). Please check your phone (${phoneNumber})'s sms for more details`)
             // reseting the form 
             setEmail("")
@@ -99,7 +125,7 @@ function Signup() {
                     <label className='text-sm uppercase'>PHONE NUMBER</label> <br />
                     <input 
                         className='w-full rounded-lg p-2 text-sm border-solid border border-slate-400' 
-                        placeholder='Phone number'
+                        placeholder='+256759983853'
                         type='tel'
                         name='phoneNumber'
                         value={phoneNumber}
