@@ -1,30 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useLocation} from 'react-router-dom';
+import axios from 'axios';
 
-const sendMessage = ()=>{
-    var myHeaders = new Headers();
-myHeaders.append("Accept", "application/json");
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-myHeaders.append("apiKey", "c5c7c7f8fb98ab8db46120194f430f71e9b1482f8d9ee2e00390d2f309b6e9c7");
-myHeaders.append('Access-Control-Allow-Origin', '*')
+const sendSMS = async (phoneNumber) => {
+    try {
+        const response = await axios.post('http://localhost:3000/send-sms', {
+            username: 'nakityo',
+            to: phoneNumber,
+            message: 'Order confirmed',
+        });
+        console.log(response)
+  
 
-var urlencoded = new URLSearchParams();
-urlencoded.append("username", "katznicho");
-urlencoded.append("to", "+256771973013");
-urlencoded.append("message", "Hello World!");
-
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
-};
-
-fetch("https://api.africastalking.com/version1/messaging", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-}
+      } catch (error) {
+        console.error('Error submitting the details:', error);
+      }
+    };
 function Signup() {
     const location = useLocation()
     const {itemName, itemPrice} = location.state ||{};
@@ -32,7 +23,7 @@ function Signup() {
     const handleSubmit = async(event)=>{
         event.preventDefault();
         try {
-            sendMessage({phoneNumber})
+            await sendSMS(phoneNumber);
             alert(`Thank you ${firstName} for placing an order of ${items} ${itemName}(s). Please check your phone (${phoneNumber})'s sms for more details`)
             // reseting the form 
             setEmail("")
