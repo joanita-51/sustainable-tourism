@@ -54,7 +54,8 @@ function Login() {
             type="submit"
             className="bg-[#459c6e] hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Login
+            <Link to="/dashboard">Login</Link>
+            
           </button>
           <span className='ms-5'>Don't have an account? <Link className='text-[#EB1D36]' to="/signup">Signup</Link></span>
         </div>

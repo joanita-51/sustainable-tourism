@@ -4,6 +4,7 @@ import Signup from './Pages/Signup'
 import Soon from './Pages/Soon'
 import Login from './Pages/LoginAccount'
 import SignupAccount from './Pages/SignupAccount'
+import UserDashboard from './Pages/Dashboard'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/coming' element= {<Soon/>}/>
         <Route path='/signup' element={<SignupAccount/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path = '/dashboard' element={<UserDashboard/>}/>
       </Routes>
 
     </BrowserRouter>
