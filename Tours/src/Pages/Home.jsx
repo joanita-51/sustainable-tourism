@@ -89,7 +89,7 @@ function Home() {
                                 <li className='hover:text-[#EB1D36]'><a href="#upcoming">Upcoming</a></li>
                             </ul>
                             <button className="bg-[#EB1D36] hover:bg-red-600 text-white font-bold py-2 px-4 uppercase rounded-full">
-                                <a href="#contact">Contact Us</a>
+                                <Link to="/signup">signup / login</Link>
                             </button>
                         </nav>
                     </div>
