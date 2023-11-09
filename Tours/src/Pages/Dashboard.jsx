@@ -4,6 +4,7 @@ import {FiEdit2,FiEdit} from 'react-icons/fi'
 import {BsGrid3X3,BsClockHistory} from 'react-icons/bs'
 import {BiDetail,BiLogOut} from 'react-icons/bi'
 import {AiOutlineDelete} from 'react-icons/ai'
+import EditProfileForm from '../components/EditProfileForm';
 
 function UserDashboard() {
   const [selectedSection, setSelectedSection]= useState('overview')
@@ -43,7 +44,7 @@ function UserDashboard() {
     setBookingType('campingGear');
     setBookingDate('');
     setQuantity(1);
-    
+
   };
 
   const handleViewOrderDetails = (order) => {
@@ -69,7 +70,7 @@ function UserDashboard() {
         </div>
         <div 
           className='flex items-center justify-center gap-2 bg-[#459c6e] hover:bg-green-700 my-5 text-white rounded-lg py-2'
-          onClick={() => handleSidebarItemClick('EditProfile')}
+          onClick={() => handleSidebarItemClick('editProfile')}
         >
           <FiEdit2/>
           <span >Edit Profile</span>
@@ -101,8 +102,8 @@ function UserDashboard() {
           </li>
           <hr />
           <li 
-            className={`flex items-center gap-2 p-3 rounded-xl hover:bg-[#e2e0e086] ${selectedSection === 'EditProfile'? 'bg-[#e2e0e086]': ''}`}
-            onClick={() => handleSidebarItemClick('EditProfile')}
+            className={`flex items-center gap-2 p-3 rounded-xl hover:bg-[#e2e0e086] ${selectedSection === 'editProfile'? 'bg-[#e2e0e086]': ''}`}
+            onClick={() => handleSidebarItemClick('editProfile')}
           >
             <BiDetail/>
             <p>Edit Profile</p>
@@ -322,6 +323,15 @@ function UserDashboard() {
 
           </div>
         
+        )}
+
+        {/* Edit Profile section */}
+        {selectedSection === 'editProfile' && (
+          <div className='my-10  bg-white p-5 rounded-xl shadow-xl h-full'>
+              <h2 className="text-xl font-bold my-4 uppercase text-center">Edit Your Profile</h2>
+              <p className="bg-[#EB1D36] h-[2px] w-20 mx-auto mb-12"></p>
+            <EditProfileForm/>
+          </div>
         )}
       </div>
     </div>
