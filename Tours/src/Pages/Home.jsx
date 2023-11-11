@@ -11,7 +11,8 @@ import {FaQuoteLeft} from 'react-icons/fa'
 import { TourismData, ToursimColumns } from '../data'
 import DataTable from 'react-data-table-component'
 import {FiMenu} from 'react-icons/fi'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useAuth } from '@pangeacyber/react-auth'
 const items = [
     {
       name: "Camping Backpack",
@@ -35,15 +36,7 @@ const items = [
 ];
 function Home() {
     
-    const navigate = useNavigate();
-    const handleClick = (itemName, itemPrice) => {
-        navigate('/order',{
-            state:{
-                itemName,
-                itemPrice,
-            }
-        })
-    }
+    const {login} = useAuth();
     const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
     const [isNavOpen, setIsNavOpen] = useState(false);
     const toggleNav = ()=>{
@@ -88,8 +81,11 @@ function Home() {
                                 <li className='hover:text-[#EB1D36]'><a href="#services">Services</a></li>
                                 <li className='hover:text-[#EB1D36]'><a href="#upcoming">Upcoming</a></li>
                             </ul>
-                            <button className="bg-[#EB1D36] hover:bg-red-600 text-white font-bold py-2 px-4 uppercase rounded-full">
-                                <Link to="/signup">signup / login</Link>
+                            <button 
+                                className="bg-[#EB1D36] hover:bg-red-600 text-white font-bold py-2 px-4 uppercase rounded-full"
+                                onClick={login}
+                            >
+                                signup / login
                             </button>
                         </nav>
                     </div>
@@ -138,7 +134,7 @@ function Home() {
                     </div>
                     <div className="px-6 py-4">
                         <button
-                        onClick={() => handleClick(item.name, item.price)}
+                        onClick={login}
                         className="bg-[#EB1D36] hover:bg-[#C31228] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-full"
                         >
                         Order Now

@@ -5,6 +5,7 @@ import {BsGrid3X3,BsClockHistory} from 'react-icons/bs'
 import {BiDetail,BiLogOut} from 'react-icons/bi'
 import {AiOutlineDelete} from 'react-icons/ai'
 import EditProfileForm from '../components/EditProfileForm';
+import { useAuth } from '@pangeacyber/react-auth';
 
 function UserDashboard() {
   const [selectedSection, setSelectedSection]= useState('overview')
@@ -13,7 +14,7 @@ function UserDashboard() {
   const [quantity, setQuantity] = useState(1);
   const [orders, setOrders] = useState([]);
   const [showOrderDetails, setShowOrderDetails] = useState(null);
-
+  const {logout} = useAuth();
   const handleSidebarItemClick = (section) =>{
     setSelectedSection(section)
   }
@@ -76,7 +77,7 @@ function UserDashboard() {
           <span >Edit Profile</span>
         </div>
 
-        <ul className='sp space-y-3'>
+        <ul className='sp space-y-3 cursor-pointer'>
           <li 
             className={`mt-9 flex items-center gap-2 p-3 rounded-xl hover:bg-[#e2e0e086] ${selectedSection ==='overview'? 'bg-[#e2e0e086]':''}`}
             onClick={() => handleSidebarItemClick('overview')}
@@ -111,7 +112,7 @@ function UserDashboard() {
           <hr />
           <li 
             className={`flex items-center gap-2 p-3 rounded-xl hover:bg-[#e2e0e086] ${selectedSection === 'logout'? 'bg-[#e2e0e086]': ''}`}
-            onClick={() => handleSidebarItemClick('logout')}>
+            onClick={logout}>
             <BiLogOut/>
             <p>Logout</p>
           </li>
@@ -238,7 +239,7 @@ function UserDashboard() {
 
         {/* make booking section */}
         {selectedSection === 'makeBooking' && (
-          <div className="bg-white px-5 py-10 h-full rounded-xl shadow-xl">
+          <div className="bg-white px-10 py-10 h-full rounded-xl shadow-xl">
             {/* Making New Bookings Section */}
             <h2 className="text-xl font-bold my-4 uppercase text-center">Make a New Booking</h2>
             <p className="bg-[#EB1D36] h-[2px] w-20 mx-auto mb-12"></p>
@@ -331,6 +332,13 @@ function UserDashboard() {
               <h2 className="text-xl font-bold my-4 uppercase text-center">Edit Your Profile</h2>
               <p className="bg-[#EB1D36] h-[2px] w-20 mx-auto mb-12"></p>
             <EditProfileForm/>
+          </div>
+        )}
+
+        {/* Logout section */}
+        {selectedSection === 'logout' && (
+          <div className='flex justify-center'>
+            <p>Please wait for a moment ... </p>
           </div>
         )}
       </div>
