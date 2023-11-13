@@ -11,7 +11,7 @@ import {FaQuoteLeft} from 'react-icons/fa'
 import { TourismData, ToursimColumns } from '../data'
 import DataTable from 'react-data-table-component'
 import {FiMenu} from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@pangeacyber/react-auth'
 const items = [
     {
@@ -36,12 +36,26 @@ const items = [
 ];
 function Home() {
     
-    const {login} = useAuth();
+    const {user, login} = useAuth();
+    const navigate = useNavigate()
     const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
     const [isNavOpen, setIsNavOpen] = useState(false);
     const toggleNav = ()=>{
         setIsNavOpen(!isNavOpen)
     }
+    const handleLogin = async () => {
+        try {
+          // Call the login function, which may perform the login operation.
+          login();
+      
+          // After a successful login, you can now access the user object.
+          console.log(user);
+        } catch (error) {
+          // Handle any login errors here.
+          console.error("Login failed:", error);
+        }
+    };
+    
   return (
     <>
         {/* Hero section */}
@@ -83,7 +97,7 @@ function Home() {
                             </ul>
                             <button 
                                 className="bg-[#EB1D36] hover:bg-red-600 text-white font-bold py-2 px-4 uppercase rounded-full"
-                                onClick={login}
+                                onClick={handleLogin}
                             >
                                 signup / login
                             </button>
